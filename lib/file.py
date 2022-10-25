@@ -1,4 +1,5 @@
 import os
+import random
 
 def get_folder_contents(path): 
     return os.listdir(path)
@@ -27,6 +28,15 @@ def crawl_for_folders(folder):
             for subitem in crawl_for_folders(combined):
                 data.append(subitem)
     return data
+
+def get_random_image(folder):
+    photos = []
+    for file in get_folder_contents(folder):
+        if isphoto(file):
+            photos.append(file)
+    
+    if len(photos) == 0: raise Exception("no photos found")
+    return photos[random.randrange(0, len(photos))]
 
 def get_extension(file):
     filename, extension = os.path.splitext(file)
